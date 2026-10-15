@@ -20,6 +20,20 @@
       "board": "ibotta",
       "careers_url": "https://jobs.ashbyhq.com/ibotta",
       "enabled": true
+    },
+    {
+      "company": "SimplifyJobs Summer 2027 community list",
+      "platform": "community_json",
+      "feed_url": "https://raw.githubusercontent.com/SimplifyJobs/Summer2027-Internships/dev/.github/scripts/listings.json",
+      "careers_url": "https://github.com/SimplifyJobs/Summer2027-Internships",
+      "enabled": true
+    },
+    {
+      "company": "Understudy Summer 2027 community list",
+      "platform": "community_json",
+      "feed_url": "https://raw.githubusercontent.com/Keugene11/Summer-2027-Tech-Internships/main/.github/scripts/listings.json",
+      "careers_url": "https://github.com/Keugene11/Summer-2027-Tech-Internships",
+      "enabled": true
     }
   ]
 }
