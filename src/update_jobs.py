@@ -159,6 +159,52 @@ def normalize(source: dict, raw: dict, seen: str) -> dict | None:
     }
 
 
+README_FILE = ROOT / "README.md"
+TABLE_START = "<!-- JOBS_TABLE_START -->"
+TABLE_END = "<!-- JOBS_TABLE_END -->"
+
+
+def markdown_cell(value: str) -> str:
+    return clean_text(str(value or "")).replace("|", "\\|").replace("[", "\\[").replace("]", "\\]")
+
+
+def render_readme_table(rows: dict[str, dict]) -> None:
+    readme = README_FILE.read_text(encoding="utf-8")
+    active = sorted(
+        (row for row in rows.values() if row.get("listing_status") == "listed"),
+        key=lambda row: (row.get("company", "").lower(), row.get("title", "").lower()),
+    )
+    lines = [
+        TABLE_START,
+        f"**{len(active)} listings currently present in the tracked sources** · Last refreshed {now_utc()}",
+        "",
+        "| Company | Internship | Location | Work mode | CPT / sponsorship evidence |",
+        "|---|---|---|---|---|",
+    ]
+    labels = {
+        "explicit_cpt_yes": "Posting explicitly mentions CPT/F-1 eligibility",
+        "explicit_cpt_no": "Posting explicitly excludes CPT/F-1",
+        "possible_restriction": "Possible restriction — confirm with employer",
+        "unknown": "Not stated — confirm with employer",
+    }
+    for row in active:
+        url = row.get("job_url", "")
+        company = markdown_cell(row.get("company", ""))
+        title = markdown_cell(row.get("title", ""))
+        location = markdown_cell(row.get("location", ""))
+        mode = markdown_cell(row.get("workplace_type", "not stated"))
+        status = labels.get(row.get("cpt_status", "unknown"), "Not stated — confirm with employer")
+        lines.append(f"| [{company}](<{url}>) | [{title}](<{url}>) | {location} | {mode} | {status} |")
+    lines.extend(["", TABLE_END])
+    block = "\\n".join(lines)
+    if TABLE_START in readme and TABLE_END in readme:
+        before, remainder = readme.split(TABLE_START, 1)
+        _, after = remainder.split(TABLE_END, 1)
+        readme = before.rstrip() + "\\n\\n" + block + after
+    else:
+        readme = readme.replace("# CPT-Friendly U.S. Data Internships", "# CPT-Friendly U.S. Data Internships\\n\\n" + block, 1)
+    README_FILE.write_text(readme, encoding="utf-8")
+
 def load_rows() -> dict[str, dict]:
     if not JOBS_FILE.exists():
         return {}
