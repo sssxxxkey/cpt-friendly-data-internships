@@ -1,12 +1,12 @@
 # CPT-Friendly U.S. Data Internships
 
-An evidence-first, community-maintained tracker for U.S. undergraduate data internships. It collects public postings in data analytics, business intelligence, data science, and related roles, then records what each source actually says about F-1/CPT work authorization.
+An evidence-first, community-maintained tracker for U.S. undergraduate data internships. It collects public postings in data analytics, business intelligence, data science, and related roles, then records what each source actually says about F-1/CPT work authorization. Listings are sorted newest-first by the posting date when the source provides one; otherwise the table shows when this tracker first detected the listing. Closing dates are shown only when stated by the source.
 
 <!-- JOBS_TABLE_START -->
 **289 listings currently present in the tracked sources** · Last refreshed 2026-10-15T16:09:03+00:00
 
-| Company | Internship | Location | Work mode | CPT / sponsorship evidence |
-|---|---|---|---|---|
+| Company | Internship | Location | Work mode | Posted / first seen | Application closes | CPT / sponsorship evidence |
+|---|---|---|---|---|---|---|
 | [3M](<https://3m.wd1.myworkdayjobs.com/en-US/Search/job/US-Minnesota-Maplewood/Internship---2027-Undergraduate-Business-Analytics-Intern---Consumer-Business-Group--CBG-_R01171049>) | [Business Analyst Intern - Consumer Business Group](<https://3m.wd1.myworkdayjobs.com/en-US/Search/job/US-Minnesota-Maplewood/Internship---2027-Undergraduate-Business-Analytics-Intern---Consumer-Business-Group--CBG-_R01171049>) | Maplewood, MN | not stated | Not stated — confirm with employer |
 | [AECOM](<https://jobs.smartrecruiters.com/AECOM2/744000155565444>) | [Engineering/Data Analytics Intern](<https://jobs.smartrecruiters.com/AECOM2/744000155565444>) | Atlanta, GA | not stated | Not stated — confirm with employer |
 | [AGCO](<https://careers.agcocorp.com/job/Business-Intelligence-Intern-Spring-2027/1440110900/?ats=successfactors>) | [Business Intelligence Intern](<https://careers.agcocorp.com/job/Business-Intelligence-Intern-Spring-2027/1440110900/?ats=successfactors>) | United States | not stated | Not stated — confirm with employer |
