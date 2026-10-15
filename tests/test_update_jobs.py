@@ -41,5 +41,24 @@ class PostingFilterTests(unittest.TestCase):
         self.assertIsNone(module.normalize(source, raw, "2026-10-15T00:00:00+00:00"))
 
 
+
+    def test_excludes_explicit_no_sponsorship_from_direct_posting(self):
+        source = {"company": "Example", "platform": "greenhouse", "careers_url": "https://example.com"}
+        raw = {"title": "Data Analyst Intern - Summer 2027", "content": "We do not offer visa sponsorship.", "location": {"name": "Chicago, IL"}, "absolute_url": "https://example.com/job/4"}
+        self.assertIsNone(module.normalize(source, raw, "2026-10-15T00:00:00+00:00"))
+
+    def test_keeps_community_role_when_sponsorship_is_not_stated(self):
+        source = {"company": "Community feed", "platform": "community_json", "careers_url": "https://github.com/example/list"}
+        raw = {"company_name": "Example", "title": "Business Intelligence Intern - Summer 2027", "url": "https://example.com/job/5", "locations": ["Denver, Colorado, United States"], "active": True, "is_visible": True, "terms": ["Summer 2027"]}
+        row = module.normalize(source, raw, "2026-10-15T00:00:00+00:00")
+        self.assertIsNotNone(row)
+        self.assertEqual(row["cpt_status"], "unknown")
+        self.assertEqual(row["sponsorship_wording"], "not_stated_in_community_feed")
+
+    def test_excludes_community_listing_explicitly_marked_no_sponsorship(self):
+        source = {"company": "Community feed", "platform": "community_json", "careers_url": "https://github.com/example/list"}
+        raw = {"company_name": "Example", "title": "Business Intelligence Intern - Summer 2027", "url": "https://example.com/job/6", "locations": ["Denver, Colorado, United States"], "active": True, "is_visible": True, "terms": ["Summer 2027"], "sponsorship": "Does Not Offer Sponsorship"}
+        self.assertIsNone(module.normalize(source, raw, "2026-10-15T00:00:00+00:00"))
+
 if __name__ == "__main__":
     unittest.main()
