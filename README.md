@@ -2,6 +2,11 @@
 
 An evidence-first, community-maintained tracker for U.S. undergraduate data internships. It collects public postings in data analytics, business intelligence, data science, and related roles, then records what each source actually says about F-1/CPT work authorization.
 
+
+<!-- JOBS_TABLE_START -->
+The live clickable job table is generated automatically from `data/jobs.csv` on each successful refresh.
+<!-- JOBS_TABLE_END -->
+
 ## Important: CPT is not H-1B sponsorship
 
 CPT is authorization issued by a student's school for a specific employer and period. A company's past H-1B filings do **not** prove that a particular internship accepts CPT. This project therefore never treats H-1B history as CPT approval, and never turns silence in a posting into a positive claim.
