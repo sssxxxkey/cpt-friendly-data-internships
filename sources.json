@@ -1,0 +1,25 @@
+{
+  "sources": [
+    {
+      "company": "Figma",
+      "platform": "greenhouse",
+      "board": "figma",
+      "careers_url": "https://job-boards.greenhouse.io/figma",
+      "enabled": true
+    },
+    {
+      "company": "Robinhood",
+      "platform": "greenhouse",
+      "board": "robinhood",
+      "careers_url": "https://job-boards.greenhouse.io/robinhood",
+      "enabled": true
+    },
+    {
+      "company": "Ibotta",
+      "platform": "ashby",
+      "board": "ibotta",
+      "careers_url": "https://jobs.ashbyhq.com/ibotta",
+      "enabled": true
+    }
+  ]
+}
