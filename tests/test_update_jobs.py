@@ -35,6 +35,11 @@ class PostingFilterTests(unittest.TestCase):
         raw = {"title": "Data Analyst II", "content": "Data analytics role.", "location": {"name": "Atlanta, GA"}, "absolute_url": "https://example.com/job/2"}
         self.assertIsNone(module.normalize(source, raw, "2026-10-15T00:00:00+00:00"))
 
+    def test_excludes_general_operations_role_that_only_mentions_data_in_description(self):
+        source = {"company": "Example", "platform": "ashby", "careers_url": "https://example.com"}
+        raw = {"title": "Customer Operations Intern", "descriptionPlain": "Use data analytics to improve support workflows.", "location": "Denver, CO", "jobUrl": "https://example.com/job/3"}
+        self.assertIsNone(module.normalize(source, raw, "2026-10-15T00:00:00+00:00"))
+
 
 if __name__ == "__main__":
     unittest.main()
