@@ -45,7 +45,7 @@ def classify_authorization(text: str) -> tuple[str, str, str]:
     text = re.sub(r"\s+", " ", clean_text(text))
     explicit_yes = re.search(r"\b(CPT|curricular practical training|F-?1)\b.{0,100}\b(accept|eligible|welcome|consider|authorized)\b|\b(accept|eligible|welcome|consider)\b.{0,100}\b(CPT|curricular practical training|F-?1)\b", text, re.I)
     explicit_no = re.search(r"\b(no|not|ineligible|unable to accept|do not accept|cannot accept)\b.{0,80}\b(CPT|curricular practical training|F-?1)\b|\b(CPT|curricular practical training|F-?1)\b.{0,80}\b(not accepted|not eligible|prohibited|not permitted)\b", text, re.I)
-    generic = re.search(r"(will not|unable to|does not|cannot)\s+(provide|offer|sponsor|support).{0,80}(visa|sponsor|work authorization)|without.{0,40}(sponsorship|visa)|no sponsorship|must not require.{0,60}(sponsorship|visa|work authorization)", text, re.I)
+    generic = re.search(r"(will not|do not|does not|unable to|cannot)\s+(provide|offer|sponsor|support).{0,80}(visa|sponsor|work authorization)|without.{0,40}(sponsorship|visa)|no sponsorship|must not require.{0,60}(sponsorship|visa|work authorization)", text, re.I)
     evidence = ""
     if explicit_no:
         status = "explicit_cpt_no"
