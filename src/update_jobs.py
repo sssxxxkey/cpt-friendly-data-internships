@@ -147,8 +147,8 @@ def normalize(source: dict, raw: dict, seen: str) -> dict | None:
             "cycle": "Summer 2027", "job_url": job_url,
             "source_url": source["careers_url"], "cpt_status": cpt,
             "sponsorship_wording": "not_stated_in_community_feed" if not sponsorship_meta else sponsorship_meta,
-            "posted_date": source_date(raw, ("posted_date", "posted_at", "postedAt", "published_at", "publishedAt", "first_published_at", "created_at")),
-            "closing_date": source_date(raw, ("closing_date", "close_date", "closeDate", "deadline", "application_deadline", "expires_at", "expiration_date")),
+            "posted_date": source_date(raw, ("posted_date", "date_posted", "datePosted", "posted_at", "postedAt", "published_date", "published_at", "publishedAt", "first_published_at", "created_at")),
+            "closing_date": source_date(raw, ("closing_date", "closingDate", "close_date", "closeDate", "deadline", "application_deadline", "applicationDeadline", "expires_at", "expiration_date")),
             "authorization_evidence": evidence,
             "first_seen_utc": "", "last_seen_utc": seen, "listing_status": "listed",
         }
@@ -190,7 +190,7 @@ def normalize(source: dict, raw: dict, seen: str) -> dict | None:
         "workplace_type": workplace, "cycle": cycle, "job_url": job_url,
         "source_url": source["careers_url"], "cpt_status": cpt,
         "sponsorship_wording": sponsorship, "authorization_evidence": evidence,
-        "posted_date": source_date(raw, ("first_published_at", "first_published", "published_at", "publishedAt", "posted_at", "postedAt", "createdAt", "created_at")),
+        "posted_date": source_date(raw, ("first_published_at", "first_published", "published_date", "published_at", "publishedAt", "posted_date", "date_posted", "datePosted", "posted_at", "postedAt", "createdAt", "created_at")),
         "closing_date": source_date(raw, ("closing_date", "close_date", "closeDate", "deadline", "application_deadline", "expires_at", "expiration_date")),
         "first_seen_utc": "", "last_seen_utc": seen, "listing_status": "listed",
     }
