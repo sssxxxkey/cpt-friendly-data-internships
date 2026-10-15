@@ -84,13 +84,16 @@ def fetch_source(source: dict) -> list[dict]:
 def normalize(source: dict, raw: dict, seen: str) -> dict | None:
     title = raw.get("title") or raw.get("text") or ""
     description = raw.get("content") or raw.get("description") or raw.get("descriptionPlain") or ""
-    location_obj = raw.get("location") or raw.get("categories", {}).get("location") or ""
+    categories = raw.get("categories") or {}
+    location_obj = raw.get("location") or categories.get("location") or ""
     if isinstance(location_obj, dict):
         location = location_obj.get("name", "")
     else:
         location = str(location_obj)
     plain = clean_text(description)
-    if not INTERNSHIP.search(title) or not ROLE_TERMS.search(title + " " + plain):
+    # Filter by title, not description: otherwise general operations roles that
+    # merely mention analytics in their copy get pulled into a data-role tracker.
+    if not INTERNSHIP.search(title) or not ROLE_TERMS.search(title):
         return None
     if NON_US.search(location):
         return None
