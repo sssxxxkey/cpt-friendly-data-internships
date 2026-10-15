@@ -196,13 +196,13 @@ def render_readme_table(rows: dict[str, dict]) -> None:
         status = labels.get(row.get("cpt_status", "unknown"), "Not stated — confirm with employer")
         lines.append(f"| [{company}](<{url}>) | [{title}](<{url}>) | {location} | {mode} | {status} |")
     lines.extend(["", TABLE_END])
-    block = "\\n".join(lines)
+    block = "\n".join(lines)
     if TABLE_START in readme and TABLE_END in readme:
         before, remainder = readme.split(TABLE_START, 1)
         _, after = remainder.split(TABLE_END, 1)
-        readme = before.rstrip() + "\\n\\n" + block + after
+        readme = before.rstrip() + "\n\n" + block + after
     else:
-        readme = readme.replace("# CPT-Friendly U.S. Data Internships", "# CPT-Friendly U.S. Data Internships\\n\\n" + block, 1)
+        readme = readme.replace("# CPT-Friendly U.S. Data Internships", "# CPT-Friendly U.S. Data Internships\n\n" + block, 1)
     README_FILE.write_text(readme, encoding="utf-8")
 
 def load_rows() -> dict[str, dict]:
