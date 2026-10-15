@@ -93,7 +93,7 @@ def normalize(source: dict, raw: dict, seen: str) -> dict | None:
         location = "; ".join(str(item) for item in location_values) or "Location not stated"
         terms = raw.get("terms") or []
         cycle_text = " ".join([title, *[str(term) for term in terms]])
-        if not re.search(r"\\bSummer\\s+2027\\b", cycle_text, re.I):
+        if not re.search(r"\bSummer\s+2027\b, cycle_text, re.I):
             return None
         # Filter by title to avoid pulling unrelated roles whose descriptions mention analytics.
         if not INTERNSHIP.search(title) or not ROLE_TERMS.search(title):
@@ -110,7 +110,7 @@ def normalize(source: dict, raw: dict, seen: str) -> dict | None:
         return {
             "company": raw.get("company_name") or source["company"],
             "title": clean_text(title), "location": location,
-            "workplace_type": "remote" if re.search(r"\\bremote\\b", location, re.I) else "not stated",
+            "workplace_type": "remote" if re.search(r"\bremote\b, location, re.I) else "not stated",
             "cycle": "Summer 2027", "job_url": job_url,
             "source_url": source["careers_url"], "cpt_status": cpt,
             "sponsorship_wording": "not_stated_in_community_feed" if not sponsorship_meta else sponsorship_meta,
