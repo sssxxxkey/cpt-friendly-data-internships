@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Refresh public U.S. data internship postings from configured ATS boards."""
+"""Refresh public U.S. data internship postings from ATS and community feeds."""
 
 from __future__ import annotations
 
@@ -24,8 +24,8 @@ FIELDS = [
 ]
 ROLE_TERMS = re.compile(
     r"data analyst|business intelligence|business analyst|data scientist|"
-    r"data analytics|analytics intern|quantitative analyst|product analyst|"
-    r"research analyst|decision science",
+    r"data science|data analytics|analytics intern|business analytics|"
+    r"product analyst|decision science",
     re.I,
 )
 INTERNSHIP = re.compile(r"\b(intern|internship|co-?op)\b", re.I)
@@ -69,6 +69,9 @@ def fetch_json(url: str) -> object:
 
 
 def fetch_source(source: dict) -> list[dict]:
+    if source["platform"] == "community_json":
+        payload = fetch_json(source["feed_url"])
+        return payload if isinstance(payload, list) else payload.get("listings", [])
     platform, board = source["platform"], urllib.parse.quote(source["board"], safe="")
     if platform == "greenhouse":
         payload = fetch_json(f"https://boards-api.greenhouse.io/v1/boards/{board}/jobs?content=true")
@@ -82,6 +85,39 @@ def fetch_source(source: dict) -> list[dict]:
 
 
 def normalize(source: dict, raw: dict, seen: str) -> dict | None:
+    if source["platform"] == "community_json":
+        if not raw.get("active", True) or not raw.get("is_visible", True):
+            return None
+        title = raw.get("title") or ""
+        location_values = raw.get("locations") or []
+        location = "; ".join(str(item) for item in location_values) or "Location not stated"
+        terms = raw.get("terms") or []
+        cycle_text = " ".join([title, *[str(term) for term in terms]])
+        if not re.search(r"\\bSummer\\s+2027\\b", cycle_text, re.I):
+            return None
+        # Filter by title to avoid pulling unrelated roles whose descriptions mention analytics.
+        if not INTERNSHIP.search(title) or not ROLE_TERMS.search(title):
+            return None
+        if NON_US.search(location):
+            return None
+        sponsorship_meta = str(raw.get("sponsorship") or "").strip().lower()
+        if sponsorship_meta == "does not offer sponsorship":
+            return None
+        job_url = raw.get("url", "")
+        if not job_url:
+            return None
+        cpt, sponsorship, evidence = classify_authorization("")
+        return {
+            "company": raw.get("company_name") or source["company"],
+            "title": clean_text(title), "location": location,
+            "workplace_type": "remote" if re.search(r"\\bremote\\b", location, re.I) else "not stated",
+            "cycle": "Summer 2027", "job_url": job_url,
+            "source_url": source["careers_url"], "cpt_status": cpt,
+            "sponsorship_wording": "not_stated_in_community_feed" if not sponsorship_meta else sponsorship_meta,
+            "authorization_evidence": evidence,
+            "first_seen_utc": "", "last_seen_utc": seen, "listing_status": "listed",
+        }
+
     title = raw.get("title") or raw.get("text") or ""
     description = raw.get("content") or raw.get("description") or raw.get("descriptionPlain") or ""
     categories = raw.get("categories") or {}
@@ -112,6 +148,8 @@ def normalize(source: dict, raw: dict, seen: str) -> dict | None:
     cycle_match = re.search(r"(?:summer|fall|spring|winter)\s+20\d{2}", title + " " + plain, re.I)
     cycle = cycle_match.group(0).title() if cycle_match else "not stated"
     cpt, sponsorship, evidence = classify_authorization(plain)
+    if cpt == "explicit_cpt_no" or sponsorship == "generic_no_sponsorship_wording":
+        return None
     return {
         "company": source["company"], "title": clean_text(title), "location": location,
         "workplace_type": workplace, "cycle": cycle, "job_url": job_url,
@@ -154,7 +192,13 @@ def update() -> int:
             key = row["job_url"]
             refreshed_urls.add(key)
             if key in rows:
-                row["first_seen_utc"] = rows[key].get("first_seen_utc") or timestamp
+                existing = rows[key]
+                row["first_seen_utc"] = existing.get("first_seen_utc") or timestamp
+                official_source_urls = {item.get("careers_url") for item in config.get("sources", []) if item.get("platform") in {"greenhouse", "lever", "ashby"}}
+                if source["platform"] == "community_json" and existing.get("source_url") in official_source_urls:
+                    row = existing
+                    row["last_seen_utc"] = timestamp
+                    row["listing_status"] = "listed"
             else:
                 row["first_seen_utc"] = timestamp
             rows[key] = row
