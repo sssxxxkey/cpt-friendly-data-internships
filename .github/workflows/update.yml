@@ -23,7 +23,7 @@ jobs:
           if ! git diff --quiet; then
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add data/jobs.csv
+            git add data/jobs.csv README.md
             git commit -m "Refresh internship listings"
             git push
           fi
