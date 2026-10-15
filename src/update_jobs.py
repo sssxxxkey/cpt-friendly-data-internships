@@ -265,6 +265,7 @@ def update() -> int:
         writer = csv.DictWriter(stream, fieldnames=FIELDS)
         writer.writeheader()
         writer.writerows(sorted(rows.values(), key=lambda item: (item["cpt_status"], item["company"].lower(), item["title"].lower())))
+    render_readme_table(rows)
     print(f"Refreshed {successful_sources} sources; {len(rows)} matching listings retained.")
     for failure in failures:
         print(f"Source warning: {failure}", file=sys.stderr)
