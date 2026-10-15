@@ -51,7 +51,7 @@ def source_date(raw: dict, keys: tuple[str, ...]) -> str:
             parsed = datetime.fromisoformat(text.replace("Z", "+00:00"))
             return parsed.date().isoformat()
         except (ValueError, TypeError, OverflowError, OSError):
-            match = re.match(r"^(\\d{4}-\\d{2}-\\d{2})", str(value).strip())
+            match = re.match(r"^(\d{4}-\d{2}-\d{2})", str(value).strip())
             if match:
                 return match.group(1)
     return ""
