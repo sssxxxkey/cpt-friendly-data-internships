@@ -20,7 +20,7 @@ JOBS_FILE = ROOT / "data" / "jobs.csv"
 FIELDS = [
     "company", "title", "location", "workplace_type", "cycle", "job_url",
     "source_url", "cpt_status", "sponsorship_wording", "authorization_evidence",
-    "first_seen_utc", "last_seen_utc", "listing_status",
+    "posted_date", "closing_date", "first_seen_utc", "last_seen_utc", "listing_status",
 ]
 ROLE_TERMS = re.compile(
     r"data analyst|business intelligence|business analyst|data scientist|"
@@ -34,6 +34,39 @@ NON_US = re.compile(r"\b(canada|united kingdom|london,? uk|india|singapore|germa
 
 def now_utc() -> str:
     return datetime.now(timezone.utc).replace(microsecond=0).isoformat()
+
+
+def source_date(raw: dict, keys: tuple[str, ...]) -> str:
+    """Return an explicitly supplied source date as YYYY-MM-DD; never infer from update time."""
+    for key in keys:
+        value = raw.get(key)
+        if not value:
+            continue
+        try:
+            if isinstance(value, (int, float)):
+                # Lever timestamps are milliseconds; other numeric values are accepted as epoch seconds.
+                seconds = value / 1000 if value > 10_000_000_000 else value
+                return datetime.fromtimestamp(seconds, timezone.utc).date().isoformat()
+            text = str(value).strip()
+            parsed = datetime.fromisoformat(text.replace("Z", "+00:00"))
+            return parsed.date().isoformat()
+        except (ValueError, TypeError, OverflowError, OSError):
+            match = re.match(r"^(\\d{4}-\\d{2}-\\d{2})", str(value).strip())
+            if match:
+                return match.group(1)
+    return ""
+
+
+def recency_key(row: dict) -> tuple[float, str]:
+    """Sort by actual posting date when exposed, else by the tracker's first-seen timestamp."""
+    value = row.get("posted_date") or row.get("first_seen_utc") or ""
+    try:
+        parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
+        if parsed.tzinfo is None:
+            parsed = parsed.replace(tzinfo=timezone.utc)
+        return parsed.timestamp(), row.get("job_url", "")
+    except (ValueError, TypeError):
+        return 0.0, row.get("job_url", "")
 
 
 def clean_text(value: str) -> str:
@@ -114,6 +147,8 @@ def normalize(source: dict, raw: dict, seen: str) -> dict | None:
             "cycle": "Summer 2027", "job_url": job_url,
             "source_url": source["careers_url"], "cpt_status": cpt,
             "sponsorship_wording": "not_stated_in_community_feed" if not sponsorship_meta else sponsorship_meta,
+            "posted_date": source_date(raw, ("posted_date", "posted_at", "postedAt", "published_at", "publishedAt", "first_published_at", "created_at")),
+            "closing_date": source_date(raw, ("closing_date", "close_date", "closeDate", "deadline", "application_deadline", "expires_at", "expiration_date")),
             "authorization_evidence": evidence,
             "first_seen_utc": "", "last_seen_utc": seen, "listing_status": "listed",
         }
@@ -155,6 +190,8 @@ def normalize(source: dict, raw: dict, seen: str) -> dict | None:
         "workplace_type": workplace, "cycle": cycle, "job_url": job_url,
         "source_url": source["careers_url"], "cpt_status": cpt,
         "sponsorship_wording": sponsorship, "authorization_evidence": evidence,
+        "posted_date": source_date(raw, ("first_published_at", "first_published", "published_at", "publishedAt", "posted_at", "postedAt", "createdAt", "created_at")),
+        "closing_date": source_date(raw, ("closing_date", "close_date", "closeDate", "deadline", "application_deadline", "expires_at", "expiration_date")),
         "first_seen_utc": "", "last_seen_utc": seen, "listing_status": "listed",
     }
 
@@ -172,14 +209,15 @@ def render_readme_table(rows: dict[str, dict]) -> None:
     readme = README_FILE.read_text(encoding="utf-8")
     active = sorted(
         (row for row in rows.values() if row.get("listing_status") == "listed"),
-        key=lambda row: (row.get("company", "").lower(), row.get("title", "").lower()),
+        key=recency_key,
+        reverse=True,
     )
     lines = [
         TABLE_START,
         f"**{len(active)} listings currently present in the tracked sources** · Last refreshed {now_utc()}",
         "",
-        "| Company | Internship | Location | Work mode | CPT / sponsorship evidence |",
-        "|---|---|---|---|---|",
+        "| Company | Internship | Location | Work mode | Posted / first seen | Application closes | CPT / sponsorship evidence |",
+        "|---|---|---|---|---|---|---|",
     ]
     labels = {
         "explicit_cpt_yes": "Posting explicitly mentions CPT/F-1 eligibility",
@@ -194,7 +232,14 @@ def render_readme_table(rows: dict[str, dict]) -> None:
         location = markdown_cell(row.get("location", ""))
         mode = markdown_cell(row.get("workplace_type", "not stated"))
         status = labels.get(row.get("cpt_status", "unknown"), "Not stated — confirm with employer")
-        lines.append(f"| [{company}](<{url}>) | [{title}](<{url}>) | {location} | {mode} | {status} |")
+        posted = row.get("posted_date") or ""
+        if posted:
+            posted_label = f"Posted {posted}"
+        else:
+            first_seen = (row.get("first_seen_utc") or "")[:10]
+            posted_label = f"First seen {first_seen}" if first_seen else "Not stated"
+        closing = row.get("closing_date") or "Not stated"
+        lines.append(f"| [{company}](<{url}>) | [{title}](<{url}>) | {location} | {mode} | {posted_label} | {closing} | {status} |")
     lines.extend(["", TABLE_END])
     block = "\n".join(lines)
     if TABLE_START in readme and TABLE_END in readme:
@@ -264,7 +309,7 @@ def update() -> int:
     with JOBS_FILE.open("w", newline="", encoding="utf-8") as stream:
         writer = csv.DictWriter(stream, fieldnames=FIELDS)
         writer.writeheader()
-        writer.writerows(sorted(rows.values(), key=lambda item: (item["cpt_status"], item["company"].lower(), item["title"].lower())))
+        writer.writerows(sorted(rows.values(), key=recency_key, reverse=True))
     render_readme_table(rows)
     print(f"Refreshed {successful_sources} sources; {len(rows)} matching listings retained.")
     for failure in failures:
