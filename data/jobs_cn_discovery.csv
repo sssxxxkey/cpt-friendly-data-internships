@@ -1,0 +1,12 @@
+Total output lines: 21
+
+COUNT=19
+company,title,location,internship_type,dataset_published_date,dataset_status_at_snapshot,tracker_status,official_job_url,dataset_source,dataset_snapshot_date,dataset_source_id,imported_date
+字节跳动,数据分析（海外生活服务）实习生,北京,实习,2026-09-24,active,官网待核验（仅数据集快照）,https://jobs.bytedance.com/campus/position/7689027642424969477/detail,Bingapplier/china-ai-jobs,2026-09-26,7689027642424969477,2026-10-15
+百度,商业分析实习生（J106171）,北京市,实习,2026-09-22,active,官网待核验（仅数据集快照）,https://talent.baidu.com/jobs/detail/social/19480212-255f-4ba8-925a-14864e99ad17,Bingapplier/china-ai-jobs,2026-09-26,19480212-255f-4ba8-925a-14864e99ad17,2026-10-15
+字节跳动,数据分析实习生 - TikTok Shop,上海,实习,2026-09-14,active,官网待核验（仅数据集快照）,https://jobs.bytedance.com/campus/position/7685308521659844917/detail,Bingapplier/china-ai-jobs,2026-09-26,7685308521659844917,2026-10-15
+字节跳动,数据科学实习生 - TikTok Shop,上海/北京,实习,2026-09-10,active,官网待核验（仅数据集快照）,https://jobs.bytedance.com/campus/position/7683787847454820661…720 tokens truncated…数据集快照）,https://jobs.bytedance.com/campus/position/7667079276529944885/detail,Bingapplier/china-ai-jobs,2026-09-26,7667079276529944885,2026-10-15
+字节跳动,风险策略数据分析实习生 - TikTok Shop,上海,实习,2026-07-22,active,官网待核验（仅数据集快照）,https://jobs.bytedance.com/campus/position/7665368414857726261/detail,Bingapplier/china-ai-jobs,2026-09-26,7665368414857726261,2026-10-15
+字节跳动,数据科学实习生-抖音电商,北京,实习,2026-07-10,active,官网待核验（仅数据集快照）,https://jobs.bytedance.com/campus/position/7660773799478102325/detail,Bingapplier/china-ai-jobs,2026-09-26,7660773799478102325,2026-10-15
+字节跳动,数据科学实习生-抖音增长,北京,实习,2026-07-09,active,官网待核验（仅数据集快照）,https://jobs.bytedance.com/campus/position/7660373421513345285/detail,Bingapplier/china-ai-jobs,2026-09-26,7660373421513345285,2026-10-15
+字节跳动,数据分析实习生-抖音UGC,上海,实习,2026-07-03,active,官网待核验（仅数据集快照）,https://jobs.bytedance.com/campus/position/7658140212882721077/detail,Bingapplier/china-ai-jobs,2026-09-26,7658140212882721077,2026-10-15
