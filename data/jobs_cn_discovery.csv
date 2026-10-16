@@ -1,11 +1,19 @@
-Total output lines: 21
-
-COUNT=19
 company,title,location,internship_type,dataset_published_date,dataset_status_at_snapshot,tracker_status,official_job_url,dataset_source,dataset_snapshot_date,dataset_source_id,imported_date
 字节跳动,数据分析（海外生活服务）实习生,北京,实习,2026-09-24,active,官网待核验（仅数据集快照）,https://jobs.bytedance.com/campus/position/7689027642424969477/detail,Bingapplier/china-ai-jobs,2026-09-26,7689027642424969477,2026-10-15
 百度,商业分析实习生（J106171）,北京市,实习,2026-09-22,active,官网待核验（仅数据集快照）,https://talent.baidu.com/jobs/detail/social/19480212-255f-4ba8-925a-14864e99ad17,Bingapplier/china-ai-jobs,2026-09-26,19480212-255f-4ba8-925a-14864e99ad17,2026-10-15
 字节跳动,数据分析实习生 - TikTok Shop,上海,实习,2026-09-14,active,官网待核验（仅数据集快照）,https://jobs.bytedance.com/campus/position/7685308521659844917/detail,Bingapplier/china-ai-jobs,2026-09-26,7685308521659844917,2026-10-15
-字节跳动,数据科学实习生 - TikTok Shop,上海/北京,实习,2026-09-10,active,官网待核验（仅数据集快照）,https://jobs.bytedance.com/campus/position/7683787847454820661…720 tokens truncated…数据集快照）,https://jobs.bytedance.com/campus/position/7667079276529944885/detail,Bingapplier/china-ai-jobs,2026-09-26,7667079276529944885,2026-10-15
+字节跳动,数据科学实习生 - TikTok Shop,上海/北京,实习,2026-09-10,active,官网待核验（仅数据集快照）,https://jobs.bytedance.com/campus/position/7683787847454820661/detail,Bingapplier/china-ai-jobs,2026-09-26,7683787847454820661,2026-10-15
+字节跳动,策略经营分析实习生 - 抖音电商运营,上海,实习,2026-09-04,active,官网待核验（仅数据集快照）,https://jobs.bytedance.com/campus/position/7681611798131804421/detail,Bingapplier/china-ai-jobs,2026-09-26,7681611798131804421,2026-10-15
+字节跳动,数据科学实习生 - TikTok Shop,北京,实习,2026-08-26,active,官网待核验（仅数据集快照）,https://jobs.bytedance.com/campus/position/7678256791041804597/detail,Bingapplier/china-ai-jobs,2026-09-26,7678256791041804597,2026-10-15
+字节跳动,效果广告数据分析&AI Agent实习生 - Pangle,上海,实习,2026-08-25,active,官网待核验（仅数据集快照）,https://jobs.bytedance.com/campus/position/7677898794873063685/detail,Bingapplier/china-ai-jobs,2026-09-26,7677898794873063685,2026-10-15
+字节跳动,数据分析实习生 - TikTok Shop,北京/上海,实习,2026-08-24,active,官网待核验（仅数据集快照）,https://jobs.bytedance.com/campus/position/7677571671927212341/detail,Bingapplier/china-ai-jobs,2026-09-26,7677571671927212341,2026-10-15
+字节跳动,效果广告数据分析&AI Agent实习生 - Pangle,深圳,实习,2026-08-12,active,官网待核验（仅数据集快照）,https://jobs.bytedance.com/campus/position/7673127146861250869/detail,Bingapplier/china-ai-jobs,2026-09-26,7673127146861250869,2026-10-15
+字节跳动,泛商城推荐数据科学实习生 - TikTok Shop,北京/上海,实习,2026-08-03,active,官网待核验（仅数据集快照）,https://jobs.bytedance.com/campus/position/7669795295006755125/detail,Bingapplier/china-ai-jobs,2026-09-26,7669795295006755125,2026-10-15
+字节跳动,数据分析实习生 - TikTok Shop,上海,实习,2026-08-01,active,官网待核验（仅数据集快照）,https://jobs.bytedance.com/campus/position/7668930444044339461/detail,Bingapplier/china-ai-jobs,2026-09-26,7668930444044339461,2026-10-15
+字节跳动,AI自动化实习生（数据分析方向）-TikTok,上海,实习,2026-07-27,active,官网待核验（仅数据集快照）,https://jobs.bytedance.com/campus/position/7667113882496141573/detail,Bingapplier/china-ai-jobs,2026-09-26,7667113882496141573,2026-10-15
+字节跳动,国际电商数据科学实习生 - TikTok Shop,上海,实习,2026-07-27,active,官网待核验（仅数据集快照）,https://jobs.bytedance.com/campus/position/7667158027153951029/detail,Bingapplier/china-ai-jobs,2026-09-26,7667158027153951029,2026-10-15
+字节跳动,数据科学实习生 - TikTok Shop,北京/上海,实习,2026-07-27,active,官网待核验（仅数据集快照）,https://jobs.bytedance.com/campus/position/7667089186404583685/detail,Bingapplier/china-ai-jobs,2026-09-26,7667089186404583685,2026-10-15
+字节跳动,经营分析实习生 - 小荷健康,北京,实习,2026-07-27,active,官网待核验（仅数据集快照）,https://jobs.bytedance.com/campus/position/7667079276529944885/detail,Bingapplier/china-ai-jobs,2026-09-26,7667079276529944885,2026-10-15
 字节跳动,风险策略数据分析实习生 - TikTok Shop,上海,实习,2026-07-22,active,官网待核验（仅数据集快照）,https://jobs.bytedance.com/campus/position/7665368414857726261/detail,Bingapplier/china-ai-jobs,2026-09-26,7665368414857726261,2026-10-15
 字节跳动,数据科学实习生-抖音电商,北京,实习,2026-07-10,active,官网待核验（仅数据集快照）,https://jobs.bytedance.com/campus/position/7660773799478102325/detail,Bingapplier/china-ai-jobs,2026-09-26,7660773799478102325,2026-10-15
 字节跳动,数据科学实习生-抖音增长,北京,实习,2026-07-09,active,官网待核验（仅数据集快照）,https://jobs.bytedance.com/campus/position/7660373421513345285/detail,Bingapplier/china-ai-jobs,2026-09-26,7660373421513345285,2026-10-15
