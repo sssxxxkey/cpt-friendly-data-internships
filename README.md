@@ -5,9 +5,9 @@ A community-maintained, evidence-first tracker of U.S. internships in data analy
 <!-- JOBS_TABLE_START -->
 **282 unique listings currently present in the tracked sources** · Last refreshed 2026-10-15T22:45:45+00:00
 
-A posting may appear in more than one degree group when the source explicitly lists multiple eligible levels. “Not stated” means the checked source did not provide clear degree-level evidence; verify on the employer posting.
+A posting may appear in more than one degree group when the source mentions multiple education levels. These are automated text signals, not a final eligibility decision; confirm requirements on the employer posting. “Not stated” means the checked source did not provide clear degree-level evidence.
 
-### Undergraduate eligible
+### Undergraduate / Bachelor’s mentioned
 
 | Company | Internship | Location | Work mode | Posted / first seen | Application closes | CPT / sponsorship evidence | Degree evidence |
 |---|---|---|---|---|---|---|---|
@@ -15,7 +15,7 @@ A posting may appear in more than one degree group when the source explicitly li
 | [Centene](<https://centene.wd5.myworkdayjobs.com/Centene_External/job/Remote-MO/Data-and-Analytics-Summer-2027-Intern--Undergraduate-_1660515>) | [Data and Analytics Intern - Undergraduate](<https://centene.wd5.myworkdayjobs.com/Centene_External/job/Remote-MO/Data-and-Analytics-Summer-2027-Intern--Undergraduate-_1660515>) | Missouri | not stated | Posted 2026-09-18 | Not stated | Not stated - confirm with employer | Title: Data and Analytics Intern - Undergraduate |
 | [Lawrence Livermore National Laboratory (LLNL)](<https://jobs.smartrecruiters.com/LLNL/3743990015289136>) | [Data Science Undergraduate Student Intern - Summer 2027](<https://jobs.smartrecruiters.com/LLNL/3743990015289136>) | Livermore, CA | not stated | Posted 2026-09-16 | Not stated | Not stated - confirm with employer | Title: Data Science Undergraduate Student Intern - Summer 2027 |
 
-### Graduate / Master's eligible
+### Graduate / Master’s mentioned
 
 | Company | Internship | Location | Work mode | Posted / first seen | Application closes | CPT / sponsorship evidence | Degree evidence |
 |---|---|---|---|---|---|---|---|
@@ -23,7 +23,7 @@ A posting may appear in more than one degree group when the source explicitly li
 | [Sanofi](<https://sanofi.wd3.myworkdayjobs.com/SanofiCareers/job/Framingham-MA/XMLNAME-2027-Spring-Co-op-Data-Science---Digital-Transformation--Framingham--MA_R2854091?utm_source=understudy&ref=understudy-list>) | [2027 Spring Co-op Data Science & Digital Transformation, Framingham, MA](<https://sanofi.wd3.myworkdayjobs.com/SanofiCareers/job/Framingham-MA/XMLNAME-2027-Spring-Co-op-Data-Science---Digital-Transformation--Framingham--MA_R2854091?utm_source=understudy&ref=understudy-list>) | Framingham, MA | not stated | Posted 2026-10-09 | Not stated | Not stated - confirm with employer | Title: 2027 Spring Co-op Data Science & Digital Transformation, Framingham, MA |
 | [Applied Materials](<https://amat.wd1.myworkdayjobs.com/External/job/AustinTX/XMLNAME-2027-Data-Analytics---Business-Operations-Spring-Co-Op-or-Summer-Intern--Bachelor-s-Master-s--Austin--TX-_R2626381?utm_source=understudy&ref=understudy-list>) | [2027 Data Analytics & Business Operations Spring Co-Op or Summer Intern- Bachelor's/Master's (Austin, TX)](<https://amat.wd1.myworkdayjobs.com/External/job/AustinTX/XMLNAME-2027-Data-Analytics---Business-Operations-Spring-Co-Op-or-Summer-Intern--Bachelor-s-Master-s--Austin--TX-_R2626381?utm_source=understudy&ref=understudy-list>) | Austin,TX | not stated | Posted 2026-10-08 | Not stated | Not stated - confirm with employer | Title: 2027 Data Analytics & Business Operations Spring Co-Op or Summer Intern- Bachelor's/Master's (Austin, TX) |
 
-### PhD / doctoral eligible
+### PhD / doctoral mentioned
 
 | Company | Internship | Location | Work mode | Posted / first seen | Application closes | CPT / sponsorship evidence | Degree evidence |
 |---|---|---|---|---|---|---|---|
