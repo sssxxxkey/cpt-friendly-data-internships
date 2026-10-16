@@ -18,7 +18,7 @@ ROOT = Path(__file__).resolve().parents[1]
 SOURCES_FILE = ROOT / "sources.json"
 JOBS_FILE = ROOT / "data" / "jobs.csv"
 FIELDS = [
-    "company", "title", "location", "workplace_type", "cycle", "job_url",
+    "company", "title", "location", "workplace_type", "cycle", "academic_levels", "education_evidence", "job_url",
     "source_url", "cpt_status", "sponsorship_wording", "authorization_evidence",
     "posted_date", "closing_date", "first_seen_utc", "last_seen_utc", "listing_status",
 ]
@@ -95,6 +95,47 @@ def classify_authorization(text: str) -> tuple[str, str, str]:
     return status, sponsorship, evidence[:220]
 
 
+
+LEVEL_PATTERNS = {
+    "undergrad": re.compile(r"\b(?:undergraduate(?:s)?|undergrad(?:uate)?s?|bachelor(?:['’]s|s)?|baccalaureate|B\.?\s?[AS]\.?)\b", re.I),
+    "grad": re.compile(r"\b(?:graduate\s+(?:student|degree|program|candidate)|master(?:['’]s|s)?)\b|\bM\.?\s?(?:S|A|B\.?A|Eng|Sc)\.?(?=\W|$)", re.I),
+    "phd": re.compile(r"\b(?:Ph\.?\s?D\.?|doctoral|doctorate|doctor\s+of\s+philosophy)(?=\W|$)", re.I),
+}
+LEVEL_ORDER = ("undergrad", "grad", "phd")
+
+
+def classify_education_levels(title: str, description: str = "", degree_values: object = None) -> tuple[str, str]:
+    """Classify only degree levels stated in a title, posting text, or source metadata."""
+    levels: set[str] = set()
+    evidence: list[str] = []
+
+    if isinstance(degree_values, str):
+        degree_values = [degree_values]
+    for value in degree_values or []:
+        value = clean_text(str(value))
+        for level, pattern in LEVEL_PATTERNS.items():
+            if pattern.search(value) and level not in levels:
+                levels.add(level)
+                evidence.append(f"Source degree field: {value}")
+
+    for label, text in (("Title", clean_text(title)), ("Posting", clean_text(description))):
+        if not text:
+            continue
+        for level, pattern in LEVEL_PATTERNS.items():
+            match = pattern.search(text)
+            if match and level not in levels:
+                levels.add(level)
+                start = max(0, match.start() - 70)
+                end = min(len(text), match.end() + 90)
+                snippet = re.sub(r"\s+", " ", text[start:end]).strip()
+                evidence.append(f"{label}: …{snippet}…")
+
+    if not levels:
+        return "unspecified", ""
+    ordered = [level for level in LEVEL_ORDER if level in levels]
+    return ";".join(ordered), " | ".join(evidence)[:360]
+
+
 def fetch_json(url: str) -> object:
     request = urllib.request.Request(url, headers={"User-Agent": "cpt-friendly-data-internships/1.0"})
     with urllib.request.urlopen(request, timeout=30) as response:
@@ -140,11 +181,13 @@ def normalize(source: dict, raw: dict, seen: str) -> dict | None:
         if not job_url:
             return None
         cpt, sponsorship, evidence = classify_authorization("")
+        degree_values = raw.get("degrees") or raw.get("degree_levels") or raw.get("degree_level") or raw.get("education") or []
+        academic_levels, education_evidence = classify_education_levels(title, "", degree_values)
         return {
             "company": raw.get("company_name") or source["company"],
             "title": clean_text(title), "location": location,
             "workplace_type": "remote" if re.search(r"\bremote\b", location, re.I) else "not stated",
-            "cycle": "Summer 2027", "job_url": job_url,
+            "cycle": "Summer 2027", "academic_levels": academic_levels, "education_evidence": education_evidence, "job_url": job_url,
             "source_url": source["careers_url"], "cpt_status": cpt,
             "sponsorship_wording": "not_stated_in_community_feed" if not sponsorship_meta else sponsorship_meta,
             "posted_date": source_date(raw, ("posted_date", "date_posted", "datePosted", "posted_at", "postedAt", "published_date", "published_at", "publishedAt", "first_published_at", "created_at")),
@@ -162,6 +205,7 @@ def normalize(source: dict, raw: dict, seen: str) -> dict | None:
     else:
         location = str(location_obj)
     plain = clean_text(description)
+    academic_levels, education_evidence = classify_education_levels(title, plain)
     # Filter by title, not description: otherwise general operations roles that
     # merely mention analytics in their copy get pulled into a data-role tracker.
     if not INTERNSHIP.search(title) or not ROLE_TERMS.search(title):
@@ -187,7 +231,8 @@ def normalize(source: dict, raw: dict, seen: str) -> dict | None:
         return None
     return {
         "company": source["company"], "title": clean_text(title), "location": location,
-        "workplace_type": workplace, "cycle": cycle, "job_url": job_url,
+        "workplace_type": workplace, "cycle": cycle,
+        "academic_levels": academic_levels, "education_evidence": education_evidence, "job_url": job_url,
         "source_url": source["careers_url"], "cpt_status": cpt,
         "sponsorship_wording": sponsorship, "authorization_evidence": evidence,
         "posted_date": source_date(raw, ("first_published_at", "first_published", "published_date", "published_at", "publishedAt", "posted_date", "date_posted", "datePosted", "posted_at", "postedAt", "createdAt", "created_at")),
@@ -212,42 +257,71 @@ def render_readme_table(rows: dict[str, dict]) -> None:
         key=recency_key,
         reverse=True,
     )
-    lines = [
-        TABLE_START,
-        f"**{len(active)} listings currently present in the tracked sources** · Last refreshed {now_utc()}",
-        "",
-        "| Company | Internship | Location | Work mode | Posted / first seen | Application closes | CPT / sponsorship evidence |",
-        "|---|---|---|---|---|---|---|",
-    ]
+    groups = {
+        "undergrad": ("Undergraduate eligible", []),
+        "grad": ("Graduate / Master's eligible", []),
+        "phd": ("PhD / doctoral eligible", []),
+        "unspecified": ("Education level not stated - check the original posting", []),
+    }
+    for row in active:
+        levels = set((row.get("academic_levels") or "unspecified").split(";"))
+        assigned = False
+        for level in ("undergrad", "grad", "phd"):
+            if level in levels:
+                groups[level][1].append(row)
+                assigned = True
+        if not assigned:
+            groups["unspecified"][1].append(row)
+
     labels = {
         "explicit_cpt_yes": "Posting explicitly mentions CPT/F-1 eligibility",
         "explicit_cpt_no": "Posting explicitly excludes CPT/F-1",
-        "possible_restriction": "Possible restriction — confirm with employer",
-        "unknown": "Not stated — confirm with employer",
+        "possible_restriction": "Possible restriction - confirm with employer",
+        "unknown": "Not stated - confirm with employer",
     }
-    for row in active:
-        url = row.get("job_url", "")
-        company = markdown_cell(row.get("company", ""))
-        title = markdown_cell(row.get("title", ""))
-        location = markdown_cell(row.get("location", ""))
-        mode = markdown_cell(row.get("workplace_type", "not stated"))
-        status = labels.get(row.get("cpt_status", "unknown"), "Not stated — confirm with employer")
-        posted = row.get("posted_date") or ""
-        if posted:
-            posted_label = f"Posted {posted}"
-        else:
-            first_seen = (row.get("first_seen_utc") or "")[:10]
-            posted_label = f"First seen {first_seen}" if first_seen else "Not stated"
-        closing = row.get("closing_date") or "Not stated"
-        lines.append(f"| [{company}](<{url}>) | [{title}](<{url}>) | {location} | {mode} | {posted_label} | {closing} | {status} |")
-    lines.extend(["", TABLE_END])
+    lines = [
+        TABLE_START,
+        f"**{len(active)} unique listings currently present in the tracked sources** · Last refreshed {now_utc()}",
+        "",
+        "A posting may appear in more than one degree group when the source explicitly lists multiple eligible levels. “Not stated” means the checked source did not provide clear degree-level evidence; verify on the employer posting.",
+        "",
+    ]
+    for level, (heading, group_rows) in groups.items():
+        lines.extend([
+            f"### {heading}",
+            "",
+            "| Company | Internship | Location | Work mode | Posted / first seen | Application closes | CPT / sponsorship evidence | Degree evidence |",
+            "|---|---|---|---|---|---|---|---|",
+        ])
+        for row in group_rows:
+            url = row.get("job_url", "")
+            company = markdown_cell(row.get("company", ""))
+            title = markdown_cell(row.get("title", ""))
+            location = markdown_cell(row.get("location", ""))
+            mode = markdown_cell(row.get("workplace_type", "not stated"))
+            status = labels.get(row.get("cpt_status", "unknown"), "Not stated - confirm with employer")
+            posted = row.get("posted_date") or ""
+            if posted:
+                posted_label = f"Posted {posted}"
+            else:
+                first_seen = (row.get("first_seen_utc") or "")[:10]
+                posted_label = f"First seen {first_seen}" if first_seen else "Not stated"
+            closing = row.get("closing_date") or "Not stated"
+            degree_evidence = markdown_cell(row.get("education_evidence") or "No degree-level evidence in the checked feed")
+            lines.append(f"| [{company}](<{url}>) | [{title}](<{url}>) | {location} | {mode} | {posted_label} | {closing} | {status} | {degree_evidence} |")
+        lines.append("")
+    lines.append(TABLE_END)
     block = "\n".join(lines)
     if TABLE_START in readme and TABLE_END in readme:
         before, remainder = readme.split(TABLE_START, 1)
         _, after = remainder.split(TABLE_END, 1)
         readme = before.rstrip() + "\n\n" + block + after
     else:
-        readme = readme.replace("# CPT-Friendly U.S. Data Internships", "# CPT-Friendly U.S. Data Internships\n\n" + block, 1)
+        readme = readme.replace("# U.S. Data Internship Tracker", "# U.S. Data Internship Tracker\n\n" + block, 1)
+    readme = readme.replace(
+        "Listings are ordered newest-first by the employer’s posting date when available, with first-seen date used as a fallback; closing dates are included only when stated by the source.",
+        "Listings are grouped by degree level when the source provides clear evidence: undergraduate, graduate/master’s, and PhD/doctoral. A listing may appear in multiple groups if multiple levels are explicitly eligible; unclear postings remain in a separate not-stated group. Within each group, listings are ordered newest-first by the employer’s posting date when available, with first-seen date as a fallback; closing dates appear only when stated by the source."
+    )
     README_FILE.write_text(readme, encoding="utf-8")
 
 def load_rows() -> dict[str, dict]:
