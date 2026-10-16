@@ -1,5 +1,7 @@
 # U.S. Data Internship Tracker
 
+[简体中文：中国岗位](README.zh-CN.md)
+
 A community-maintained, evidence-first tracker of U.S. internships in data analytics, business intelligence, data science, and related fields. Each listing links to its source and records only what the available source says about F-1/CPT work authorization: an unstated policy remains **unknown**, not assumed eligible. Listings are grouped by degree level when the source provides clear evidence: undergraduate, graduate/master’s, and PhD/doctoral. A listing may appear in multiple groups if the source mentions multiple levels; unclear postings remain in a separate not-stated group. Within each group, listings are ordered newest-first by the employer’s posting date when available, with first-seen date as a fallback; closing dates appear only when stated by the source.
 
 <!-- JOBS_TABLE_START -->
