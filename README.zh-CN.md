@@ -22,6 +22,24 @@
 | 百度 | 数据分析师（J78722） | 数据分析 / 指标监控 / 看板 | 北京 | 日常实习 | 本科及以上在读；统计、数学、计算机等优先 | 2026-07-21 | 未注明 | **需在官网确认是否仍开放** | [查看/申请](https://talent.baidu.com/jobs/detail/INTERN/148bfc4f-db2c-4827-902f-cc0c053da783) | 2026-10-15 |
 | 百度 | AIGC数据分析实习生（J81163） | AIGC业务分析 / 模型效果分析 | 北京 | 日常实习 | 本科或硕士在读 | 2026-07-21 | 未注明 | **需在官网确认是否仍开放** | [查看/申请](https://talent.baidu.com/jobs/detail/INTERN/302570bb-1256-4257-bc5c-ac1725794657) | 2026-10-15 |
 
+### 本次筛出的 DA / DS / 商业分析实习线索（19 条，未核实当前状态）
+
+以下是从 2026-09-26 快照里筛出的记录：招聘类型为“实习”、快照状态为 `active`、数据集类别为“数据分析”，岗位名匹配数据分析/数据科学/商业分析/经营分析，并排除标注、工程、算法等不符合本项目定位的职位。**这里的 active 只表示数据集当时的标记，不代表今天仍开放；每条都需要点击官方职位页复核。**数据来源：Bingapplier 的 [China AI Jobs](https://huggingface.co/datasets/Bingapplier/china-ai-jobs)，CC BY 4.0。数据字段已按许可署名，未复制 JD 正文。
+
+|  | undefined | undefined | undefined | undefined；当前待官网核实 | [打开](<undefined>) |
+| COUNT=19 | undefined | undefined | undefined | undefined；当前待官网核实 | [打开](<undefined>) |
+| company | title | location | dataset_published_date | dataset_status_at_snapshot；当前待官网核实 | [打开](<official_job_url>) |
+| 字节跳动 | 数据分析（海外生活服务）实习生 | 北京 | 2026-09-24 | active；当前待官网核实 | [打开](<https://jobs.bytedance.com/campus/position/7689027642424969477/detail>) |
+| 百度 | 商业分析实习生（J106171） | 北京市 | 2026-09-22 | active；当前待官网核实 | [打开](<https://talent.baidu.com/jobs/detail/social/19480212-255f-4ba8-925a-14864e99ad17>) |
+| 字节跳动 | 数据分析实习生 - TikTok Shop | 上海 | 2026-09-14 | active；当前待官网核实 | [打开](<https://jobs.bytedance.com/campus/position/7685308521659844917/detail>) |
+| 字节跳动 | 数据科学实习生 - TikTok Shop | 上海/北京 | 2026-09-10 | active；当前待官网核实 | [打开](<https://jobs.bytedance.com/campus/position/7683787847454820661…720 tokens truncated…数据集快照）>) |
+| 字节跳动 | 风险策略数据分析实习生 - TikTok Shop | 上海 | 2026-07-22 | active；当前待官网核实 | [打开](<https://jobs.bytedance.com/campus/position/7665368414857726261/detail>) |
+| 字节跳动 | 数据科学实习生-抖音电商 | 北京 | 2026-07-10 | active；当前待官网核实 | [打开](<https://jobs.bytedance.com/campus/position/7660773799478102325/detail>) |
+| 字节跳动 | 数据科学实习生-抖音增长 | 北京 | 2026-07-09 | active；当前待官网核实 | [打开](<https://jobs.bytedance.com/campus/position/7660373421513345285/detail>) |
+| 字节跳动 | 数据分析实习生-抖音UGC | 上海 | 2026-07-03 | active；当前待官网核实 | [打开](<https://jobs.bytedance.com/campus/position/7658140212882721077/detail>) |
+
+完整来源字段：[data/jobs_cn_discovery.csv](data/jobs_cn_discovery.csv)。
+
 ### 快速看匹配点
 
 - **J78722 数据分析师**：偏核心指标监控、异动归因、看板维护和专题分析；要求里明确提到 SQL / Excel，Python 或 R 为加分能力。页面写“半年以上优先”，需要确认实习时长和到岗安排。
