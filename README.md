@@ -1,6 +1,6 @@
-# CPT-Friendly U.S. Data Internships
+# U.S. Data Internship Tracker
 
-An evidence-first, community-maintained tracker for U.S. undergraduate data internships. It collects public postings in data analytics, business intelligence, data science, and related roles, then records what each source actually says about F-1/CPT work authorization. Listings are sorted newest-first by the posting date when the source provides one; otherwise the table shows when this tracker first detected the listing. Closing dates are shown only when stated by the source.
+A community-maintained, evidence-first tracker of U.S. internships in data analytics, business intelligence, data science, and related fields. Each listing links to its source and records only what the available source says about F-1/CPT work authorization: an unstated policy remains **unknown**, not assumed eligible. Listings are ordered newest-first by the employer’s posting date when available, with first-seen date used as a fallback; closing dates are included only when stated by the source.
 
 <!-- JOBS_TABLE_START -->
 **282 listings currently present in the tracked sources** · Last refreshed 2026-10-15T22:45:45+00:00
