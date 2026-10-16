@@ -1,0 +1,2 @@
+source_id,source_name,scope,source_url,viewer_url,license,snapshot_date,checked_date,approx_records,refresh_policy,trust_level,notes
+hf_china_ai_jobs,China AI Jobs（Hugging Face）,中国招聘职位线索（含实习与非实习；需再筛DA/DS/BI）,https://huggingface.co/datasets/Bingapplier/china-ai-jobs,https://huggingface.co/datasets/Bingapplier/china-ai-jobs/viewer/default/train,CC BY 4.0,2026-09-26,2026-10-15,19405,上游仓库提交/快照更新时变化,discovery_only,"只用于发现候选职位；快照已滞后，status不是实时状态；必须回到公司官方职位页核验；本项目不镜像完整职位描述"
