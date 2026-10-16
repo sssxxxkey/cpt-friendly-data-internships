@@ -8,6 +8,34 @@ module = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(module)
 
 
+class EducationClassificationTests(unittest.TestCase):
+    def test_undergraduate_degree(self):
+        levels, evidence = module.classify_education_levels(
+            "Data Analyst Intern", "Currently pursuing a Bachelor's degree in Statistics."
+        )
+        self.assertEqual(levels, "undergrad")
+        self.assertIn("Bachelor", evidence)
+
+    def test_master_and_phd_metadata_are_separate_levels(self):
+        levels, _ = module.classify_education_levels(
+            "Data Scientist Intern", "", ["Master's", "PhD"]
+        )
+        self.assertEqual(levels, "grad;phd")
+
+    def test_multiple_levels_in_posting(self):
+        levels, _ = module.classify_education_levels(
+            "Analyst Intern", "Applicants pursuing a bachelor's or master's degree are eligible."
+        )
+        self.assertEqual(levels, "undergrad;grad")
+
+    def test_missing_education_evidence_is_unspecified(self):
+        levels, evidence = module.classify_education_levels(
+            "Data Analyst Intern", "Strong SQL and communication skills required."
+        )
+        self.assertEqual(levels, "unspecified")
+        self.assertEqual(evidence, "")
+
+
 class AuthorizationClassificationTests(unittest.TestCase):
     def test_explicit_cpt_acceptance(self):
         self.assertEqual(module.classify_authorization("We accept CPT candidates for this internship.")[0], "explicit_cpt_yes")
