@@ -258,9 +258,9 @@ def render_readme_table(rows: dict[str, dict]) -> None:
         reverse=True,
     )
     groups = {
-        "undergrad": ("Undergraduate eligible", []),
-        "grad": ("Graduate / Master's eligible", []),
-        "phd": ("PhD / doctoral eligible", []),
+        "undergrad": ("Undergraduate / Bachelor’s mentioned", []),
+        "grad": ("Graduate / Master’s mentioned", []),
+        "phd": ("PhD / doctoral mentioned", []),
         "unspecified": ("Education level not stated - check the original posting", []),
     }
     for row in active:
@@ -283,7 +283,7 @@ def render_readme_table(rows: dict[str, dict]) -> None:
         TABLE_START,
         f"**{len(active)} unique listings currently present in the tracked sources** · Last refreshed {now_utc()}",
         "",
-        "A posting may appear in more than one degree group when the source explicitly lists multiple eligible levels. “Not stated” means the checked source did not provide clear degree-level evidence; verify on the employer posting.",
+        "A posting may appear in more than one degree group when the source mentions multiple education levels. These are automated text signals, not a final eligibility decision; confirm requirements on the employer posting. “Not stated” means the checked source did not provide clear degree-level evidence.",
         "",
     ]
     for level, (heading, group_rows) in groups.items():
