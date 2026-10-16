@@ -320,7 +320,7 @@ def render_readme_table(rows: dict[str, dict]) -> None:
         readme = readme.replace("# U.S. Data Internship Tracker", "# U.S. Data Internship Tracker\n\n" + block, 1)
     readme = readme.replace(
         "Listings are ordered newest-first by the employer’s posting date when available, with first-seen date used as a fallback; closing dates are included only when stated by the source.",
-        "Listings are grouped by degree level when the source provides clear evidence: undergraduate, graduate/master’s, and PhD/doctoral. A listing may appear in multiple groups if multiple levels are explicitly eligible; unclear postings remain in a separate not-stated group. Within each group, listings are ordered newest-first by the employer’s posting date when available, with first-seen date as a fallback; closing dates appear only when stated by the source."
+        "Listings are grouped by degree level when the source provides clear evidence: undergraduate, graduate/master’s, and PhD/doctoral. A listing may appear in multiple groups if the source mentions multiple levels; unclear postings remain in a separate not-stated group. Within each group, listings are ordered newest-first by the employer’s posting date when available, with first-seen date as a fallback; closing dates appear only when stated by the source."
     )
     README_FILE.write_text(readme, encoding="utf-8")
 
