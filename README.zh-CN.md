@@ -24,19 +24,29 @@
 
 ### 本次筛出的 DA / DS / 商业分析实习线索（19 条，未核实当前状态）
 
-以下是从 2026-09-26 快照里筛出的记录：招聘类型为“实习”、快照状态为 `active`、数据集类别为“数据分析”，岗位名匹配数据分析/数据科学/商业分析/经营分析，并排除标注、工程、算法等不符合本项目定位的职位。**这里的 active 只表示数据集当时的标记，不代表今天仍开放；每条都需要点击官方职位页复核。**数据来源：Bingapplier 的 [China AI Jobs](https://huggingface.co/datasets/Bingapplier/china-ai-jobs)，CC BY 4.0。数据字段已按许可署名，未复制 JD 正文。
+以下记录来自 2026-09-26 数据集快照：招聘类型为“实习”、快照状态为 `active`、数据集类别为“数据分析”，岗位名匹配数据分析/数据科学/商业分析/经营分析，并排除标注、工程、算法等不符合本项目定位的职位。**这里的 active 只表示数据集当时的标记，不代表今天仍开放；每条都需要点击原始公司职位页复核。**来源：Bingapplier 的 [China AI Jobs](https://huggingface.co/datasets/Bingapplier/china-ai-jobs)，CC BY 4.0。仅导入必要的职位元数据和原始链接，没有复制 JD 正文。
 
-|  | undefined | undefined | undefined | undefined；当前待官网核实 | [打开](<undefined>) |
-| COUNT=19 | undefined | undefined | undefined | undefined；当前待官网核实 | [打开](<undefined>) |
-| company | title | location | dataset_published_date | dataset_status_at_snapshot；当前待官网核实 | [打开](<official_job_url>) |
-| 字节跳动 | 数据分析（海外生活服务）实习生 | 北京 | 2026-09-24 | active；当前待官网核实 | [打开](<https://jobs.bytedance.com/campus/position/7689027642424969477/detail>) |
-| 百度 | 商业分析实习生（J106171） | 北京市 | 2026-09-22 | active；当前待官网核实 | [打开](<https://talent.baidu.com/jobs/detail/social/19480212-255f-4ba8-925a-14864e99ad17>) |
-| 字节跳动 | 数据分析实习生 - TikTok Shop | 上海 | 2026-09-14 | active；当前待官网核实 | [打开](<https://jobs.bytedance.com/campus/position/7685308521659844917/detail>) |
-| 字节跳动 | 数据科学实习生 - TikTok Shop | 上海/北京 | 2026-09-10 | active；当前待官网核实 | [打开](<https://jobs.bytedance.com/campus/position/7683787847454820661…720 tokens truncated…数据集快照）>) |
-| 字节跳动 | 风险策略数据分析实习生 - TikTok Shop | 上海 | 2026-07-22 | active；当前待官网核实 | [打开](<https://jobs.bytedance.com/campus/position/7665368414857726261/detail>) |
-| 字节跳动 | 数据科学实习生-抖音电商 | 北京 | 2026-07-10 | active；当前待官网核实 | [打开](<https://jobs.bytedance.com/campus/position/7660773799478102325/detail>) |
-| 字节跳动 | 数据科学实习生-抖音增长 | 北京 | 2026-07-09 | active；当前待官网核实 | [打开](<https://jobs.bytedance.com/campus/position/7660373421513345285/detail>) |
-| 字节跳动 | 数据分析实习生-抖音UGC | 上海 | 2026-07-03 | active；当前待官网核实 | [打开](<https://jobs.bytedance.com/campus/position/7658140212882721077/detail>) |
+| 公司 | 岗位 | 地点 | 数据集发布时间 | 快照中的状态（非实时） | 原始职位链接 |
+|---|---|---|---|---|---|
+| 字节跳动 | 数据分析（海外生活服务）实习生 | 北京 | 2026-09-24 | 快照标记 active；当前待官网核实 | [打开](https://jobs.bytedance.com/campus/position/7689027642424969477/detail) |
+| 百度 | 商业分析实习生（J106171） | 北京市 | 2026-09-22 | 快照标记 active；当前待官网核实 | [打开](https://talent.baidu.com/jobs/detail/social/19480212-255f-4ba8-925a-14864e99ad17) |
+| 字节跳动 | 数据分析实习生 - TikTok Shop | 上海 | 2026-09-14 | 快照标记 active；当前待官网核实 | [打开](https://jobs.bytedance.com/campus/position/7685308521659844917/detail) |
+| 字节跳动 | 数据科学实习生 - TikTok Shop | 上海/北京 | 2026-09-10 | 快照标记 active；当前待官网核实 | [打开](https://jobs.bytedance.com/campus/position/7683787847454820661/detail) |
+| 字节跳动 | 策略经营分析实习生 - 抖音电商运营 | 上海 | 2026-09-04 | 快照标记 active；当前待官网核实 | [打开](https://jobs.bytedance.com/campus/position/7681611798131804421/detail) |
+| 字节跳动 | 数据科学实习生 - TikTok Shop | 北京 | 2026-08-26 | 快照标记 active；当前待官网核实 | [打开](https://jobs.bytedance.com/campus/position/7678256791041804597/detail) |
+| 字节跳动 | 效果广告数据分析&AI Agent实习生 - Pangle | 上海 | 2026-08-25 | 快照标记 active；当前待官网核实 | [打开](https://jobs.bytedance.com/campus/position/7677898794873063685/detail) |
+| 字节跳动 | 数据分析实习生 - TikTok Shop | 北京/上海 | 2026-08-24 | 快照标记 active；当前待官网核实 | [打开](https://jobs.bytedance.com/campus/position/7677571671927212341/detail) |
+| 字节跳动 | 效果广告数据分析&AI Agent实习生 - Pangle | 深圳 | 2026-08-12 | 快照标记 active；当前待官网核实 | [打开](https://jobs.bytedance.com/campus/position/7673127146861250869/detail) |
+| 字节跳动 | 泛商城推荐数据科学实习生 - TikTok Shop | 北京/上海 | 2026-08-03 | 快照标记 active；当前待官网核实 | [打开](https://jobs.bytedance.com/campus/position/7669795295006755125/detail) |
+| 字节跳动 | 数据分析实习生 - TikTok Shop | 上海 | 2026-08-01 | 快照标记 active；当前待官网核实 | [打开](https://jobs.bytedance.com/campus/position/7668930444044339461/detail) |
+| 字节跳动 | AI自动化实习生（数据分析方向）-TikTok | 上海 | 2026-07-27 | 快照标记 active；当前待官网核实 | [打开](https://jobs.bytedance.com/campus/position/7667113882496141573/detail) |
+| 字节跳动 | 国际电商数据科学实习生 - TikTok Shop | 上海 | 2026-07-27 | 快照标记 active；当前待官网核实 | [打开](https://jobs.bytedance.com/campus/position/7667158027153951029/detail) |
+| 字节跳动 | 数据科学实习生 - TikTok Shop | 北京/上海 | 2026-07-27 | 快照标记 active；当前待官网核实 | [打开](https://jobs.bytedance.com/campus/position/7667089186404583685/detail) |
+| 字节跳动 | 经营分析实习生 - 小荷健康 | 北京 | 2026-07-27 | 快照标记 active；当前待官网核实 | [打开](https://jobs.bytedance.com/campus/position/7667079276529944885/detail) |
+| 字节跳动 | 风险策略数据分析实习生 - TikTok Shop | 上海 | 2026-07-22 | 快照标记 active；当前待官网核实 | [打开](https://jobs.bytedance.com/campus/position/7665368414857726261/detail) |
+| 字节跳动 | 数据科学实习生-抖音电商 | 北京 | 2026-07-10 | 快照标记 active；当前待官网核实 | [打开](https://jobs.bytedance.com/campus/position/7660773799478102325/detail) |
+| 字节跳动 | 数据科学实习生-抖音增长 | 北京 | 2026-07-09 | 快照标记 active；当前待官网核实 | [打开](https://jobs.bytedance.com/campus/position/7660373421513345285/detail) |
+| 字节跳动 | 数据分析实习生-抖音UGC | 上海 | 2026-07-03 | 快照标记 active；当前待官网核实 | [打开](https://jobs.bytedance.com/campus/position/7658140212882721077/detail) |
 
 完整来源字段：[data/jobs_cn_discovery.csv](data/jobs_cn_discovery.csv)。
 
